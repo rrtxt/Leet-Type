@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>leet-type</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- App Header -->
+      <header class="app-header">
+        <div class="header-logo">
+          <span class="logo-terminal">&gt;_</span>
+          <span class="logo-text">leet-type</span>
+        </div>
+        <div class="header-tagline">Master code syntax at terminal speed</div>
+      </header>
+
+      <!-- Main Workspace -->
+      <main class="app-content">
+        <!-- 1. PROBLEM LIST SECTION -->
+        <section id="problem-list-section" class="screen-section active">
+          <div class="section-header">
+            <h2>Select a Challenge</h2>
+            <p>Pick a LeetCode problem to start typing its solution.</p>
+          </div>
+          
+          <div class="filter-bar">
+            <div class="search-box">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="problem-search" placeholder="Search problems..." autocomplete="off">
+            </div>
+            <div class="filter-groups">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="easy">Easy</button>
+              <button class="filter-btn" data-filter="medium">Medium</button>
+              <button class="filter-btn" data-filter="hard">Hard</button>
+            </div>
+          </div>
+
+          <div id="problems-grid" class="problems-grid">
+            <!-- Dynamic Problem Cards -->
+          </div>
+        </section>
+
+        <!-- 2. TYPING SECTION -->
+        <section id="typing-section" class="screen-section">
+          <div class="typing-nav">
+            <button id="btn-back-to-list" class="action-btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+              Problem List
+            </button>
+            <div class="typing-nav-title">
+              <span id="active-problem-title">Two Sum</span>
+              <span id="active-problem-difficulty" class="difficulty-badge easy">Easy</span>
+            </div>
+          </div>
+
+          <div class="problem-details-bar">
+            <p id="active-problem-desc">Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+          </div>
+
+          <!-- Real-Time Metrics -->
+          <div class="metrics-bar">
+            <div class="metric-card">
+              <span class="metric-label">WPM</span>
+              <span id="live-wpm" class="metric-value">0</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Accuracy</span>
+              <span id="live-accuracy" class="metric-value">100%</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Time</span>
+              <span id="live-time" class="metric-value">0.0s</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Mistakes</span>
+              <span id="live-mistakes" class="metric-value">0</span>
+            </div>
+          </div>
+
+          <!-- The Coding Terminal -->
+          <div class="terminal-container">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot close"></span>
+                <span class="dot minimize"></span>
+                <span class="dot expand"></span>
+              </div>
+              <div class="terminal-tab">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span id="terminal-filename">solution.js</span>
+              </div>
+            </div>
+            <div class="terminal-body-wrapper">
+              <!-- Hidden textarea to capture all keystrokes securely -->
+              <textarea id="typing-input" class="typing-input-hidden" autocomplete="off" autofocus></textarea>
+              <!-- Overlay display for custom highlighting -->
+              <div id="code-editor-body" class="terminal-body">
+                <!-- Spans will be rendered here dynamically -->
+              </div>
+              <!-- Focus notification overlay -->
+              <div id="focus-overlay" class="focus-overlay hidden">
+                <div class="focus-message">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon message-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 12 12 8 12"></polyline><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                  <span>Click anywhere to resume typing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shortcuts Guidelines Footer -->
+          <footer class="typing-footer">
+            <div class="guideline-item">
+              <span class="key-badge">Esc</span> Reset Session
+            </div>
+            <div class="guideline-item">
+              <span class="key-badge">Ctrl + R</span> Restart Problem
+            </div>
+            <div class="guideline-item">
+              <span class="status-indicator-dot typing-status"></span>
+              <span id="typing-status-text">Ready to type</span>
+            </div>
+          </footer>
+        </section>
+
+        <!-- 3. RESULTS SECTION -->
+        <section id="results-section" class="screen-section">
+          <div class="results-header">
+            <div class="results-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              <span>Session Completed!</span>
+            </div>
+            <h2 id="results-problem-title">Two Sum</h2>
+          </div>
+
+          <div class="results-grid">
+            <div class="result-card highlight">
+              <span class="result-label">Net Speed</span>
+              <span id="result-wpm" class="result-value">72</span>
+              <span class="result-unit">WPM</span>
+            </div>
+            <div class="result-card">
+              <span class="result-label">Accuracy</span>
+              <span id="result-accuracy" class="result-value">97.8%</span>
+              <span class="result-unit">Percent</span>
+            </div>
+            <div class="result-card">
+              <span class="result-label">Time Taken</span>
+              <span id="result-time" class="result-value">34.2s</span>
+              <span class="result-unit">Seconds</span>
+            </div>
+            <div class="result-card">
+              <span class="result-label">Total Mistakes</span>
+              <span id="result-mistakes" class="result-value">4</span>
+              <span class="result-unit">Keystrokes</span>
+            </div>
+          </div>
+
+          <div class="results-actions">
+            <button id="btn-retry" class="action-btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+              Try Again
+            </button>
+            <button id="btn-back-to-problems" class="action-btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              Select Another Challenge
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <p>&copy; 2026 leet-type. Powered by Vite + Vanilla CSS.</p>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
