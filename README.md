@@ -6,11 +6,13 @@
 
 ---
 
-## Concept
+## Concept & Demo
 
 Traditional typing tests don't reflect real-world programming habits such as typing brackets, indentation, symbols, and operators. This website aims to help train both your hands and your brain by making you type coding solutions to programming problems.
 
 With this platform, you can improve your code typing speed, build familiarity with common coding patterns, and become more comfortable writing code under pressure :). And who knows, maybe it'll help you impress your interviewer and land your dream job in tech (I hope).
+
+Try it yourself -> https://rrtxt.github.io/Leet-Type/
 
 ---
 
